@@ -1,0 +1,22 @@
+name: Mark stale issues and pull requests
+
+on:
+  schedule:
+  - cron: "30 1 * * *"
+
+jobs:
+  stale:
+
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+    - uses: actions/stale@v3
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        stale-issue-message: 'This issue is stale, create a new one and link'
+        stale-pr-message: 'This PR is stale, close and create a new one after merging upstream'
+        stale-issue-label: 'no-issue-activity'
+        stale-pr-label: 'no-pr-activity'
